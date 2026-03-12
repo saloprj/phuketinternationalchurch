@@ -1,0 +1,69 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: phuketinternationalchurch
+      POSTGRES_USER: pic_user
+      POSTGRES_PASSWORD: changeme
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U pic_user -d phuketinternationalchurch']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+      - app_node_modules:/app/node_modules
+      - uploads_dev_data:/app/public/uploads
+    ports:
+      - '3002:3000'
+    environment:
+      DATABASE_URL: postgresql://pic_user:changeme@postgres:5432/phuketinternationalchurch
+      NEXTAUTH_SECRET: dev-secret-change-in-production
+      NEXTAUTH_URL: http://localhost:3002
+      NEXT_PUBLIC_APP_URL: http://localhost:3002
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: sh -c "npm install --legacy-peer-deps && npx prisma generate && npm run dev"
+
+  umami:
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    ports:
+      - '3003:3000'
+    environment:
+      DATABASE_URL: postgresql://umami_user:umami_pass@umami_db:5432/umami
+      DATABASE_TYPE: postgresql
+      APP_SECRET: umami-dev-secret
+    depends_on:
+      umami_db:
+        condition: service_healthy
+
+  umami_db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: umami
+      POSTGRES_USER: umami_user
+      POSTGRES_PASSWORD: umami_pass
+    volumes:
+      - umami_dev_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U umami_user -d umami']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_dev_data:
+  app_node_modules:
+  uploads_dev_data:
+  umami_dev_data:

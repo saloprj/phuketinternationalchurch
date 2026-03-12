@@ -1,0 +1,162 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "visit": "Plan Your Visit",
+    "sermons": "Sermons",
+    "events": "Events",
+    "blog": "Blog",
+    "give": "Give",
+    "contact": "Contact",
+    "live": "Live",
+    "prayer": "Prayer",
+    "groups": "Groups",
+    "kids": "Kids",
+    "mission": "Mission"
+  },
+  "header": {
+    "serviceTime": "Sun 10:30 AM",
+    "planVisit": "Plan Your Visit",
+    "liveNow": "Live Now"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "affiliation": "Affiliated with Go Love Global"
+  },
+  "home": {
+    "heroTitle": "A Church for All Nations",
+    "heroSubtitle": "Welcoming people from every nation, tribe, and language to worship together in Phuket, Thailand.",
+    "heroCtaVisit": "Plan Your Visit",
+    "heroCtaSermons": "Watch Sermons",
+    "serviceTimesTitle": "Join Us",
+    "newHereTitle": "New Here?",
+    "newHereText": "We know visiting a new church can feel daunting. Let us help make your first visit a great one.",
+    "newHereCta": "What to Expect",
+    "upcomingEvents": "Upcoming Events",
+    "latestSermons": "Latest Sermons",
+    "latestBlog": "From the Blog",
+    "alphaCta": "Exploring the Christian faith? Alpha Course starts soon.",
+    "alphaButton": "Learn More",
+    "newsletterTitle": "Stay Connected",
+    "newsletterText": "Get weekly updates, sermon notes, and event reminders.",
+    "newsletterPlaceholder": "Your email address",
+    "newsletterButton": "Subscribe",
+    "mapTitle": "Find Us"
+  },
+  "visit": {
+    "title": "Plan Your Visit",
+    "serviceTimes": "Service Times",
+    "location": "Location",
+    "parking": "Parking",
+    "whatToExpect": "What to Expect",
+    "kids": "Kids & Family",
+    "faq": "Frequently Asked Questions",
+    "rsvp": "Let Us Know You're Coming"
+  },
+  "sermons": {
+    "title": "Sermons",
+    "watchOnYoutube": "Watch on YouTube",
+    "listenAudio": "Listen to Audio",
+    "downloadNotes": "Download Notes",
+    "series": "Series",
+    "speaker": "Speaker",
+    "date": "Date",
+    "noSermons": "No sermons found."
+  },
+  "events": {
+    "title": "Events",
+    "rsvp": "RSVP",
+    "location": "Location",
+    "noEvents": "No upcoming events."
+  },
+  "blog": {
+    "title": "Blog",
+    "readMore": "Read More",
+    "noPosts": "No posts found."
+  },
+  "give": {
+    "title": "Give",
+    "amount": "Amount (THB)",
+    "monthly": "Monthly Giving",
+    "oneTime": "One-time Gift",
+    "cardPayment": "Card Payment",
+    "promptPay": "PromptPay (Thailand)",
+    "scanQr": "Scan QR code with your banking app",
+    "donateButton": "Donate Now",
+    "thankYou": "Thank you for your generous gift!"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "name": "Your Name",
+    "email": "Email Address",
+    "subject": "Subject",
+    "message": "Message",
+    "consent": "I consent to my data being stored and used to respond to my request",
+    "submit": "Send Message",
+    "success": "Thank you! We'll be in touch soon.",
+    "error": "Something went wrong. Please try again."
+  },
+  "prayer": {
+    "title": "Prayer Requests",
+    "intro": "We believe in the power of prayer. Share your request and our team will pray for you.",
+    "name": "Your Name",
+    "email": "Email (optional)",
+    "request": "Your Prayer Request",
+    "isPublic": "Share this request with the congregation (anonymously)",
+    "consent": "I consent to my data being stored for prayer purposes",
+    "submit": "Submit Prayer Request",
+    "success": "Your prayer request has been received. We are praying for you."
+  },
+  "newsletter": {
+    "confirmTitle": "Please check your email",
+    "confirmText": "We've sent a confirmation link to your email address. Please click it to complete your subscription.",
+    "confirmedTitle": "You're subscribed!",
+    "confirmedText": "You'll now receive updates from Phuket International Church.",
+    "unsubscribed": "You've been unsubscribed successfully."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "notFound": "Page not found",
+    "backHome": "Back to Home",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "share": "Share",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "publish": "Publish",
+    "draft": "Save as Draft"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "posts": "Posts",
+    "events": "Events",
+    "sermons": "Sermons",
+    "pages": "Pages",
+    "staff": "Staff",
+    "prayer": "Prayer Requests",
+    "newsletter": "Newsletter",
+    "media": "Media",
+    "give": "Donations",
+    "contact": "Contact Inbox",
+    "settings": "Settings",
+    "users": "Admin Users",
+    "logout": "Log Out",
+    "newPost": "New Post",
+    "editPost": "Edit Post",
+    "translationTabs": {
+      "en": "English",
+      "th": "Thai",
+      "ru": "Russian",
+      "zh": "Chinese",
+      "autoTranslated": "Auto-translated",
+      "manuallyEdited": "Manually edited",
+      "retranslate": "Re-translate from EN"
+    }
+  }
+}

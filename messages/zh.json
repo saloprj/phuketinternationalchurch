@@ -1,0 +1,162 @@
+{
+  "nav": {
+    "home": "首页",
+    "about": "关于我们",
+    "visit": "计划参观",
+    "sermons": "讲道",
+    "events": "活动",
+    "blog": "博客",
+    "give": "奉献",
+    "contact": "联系我们",
+    "live": "直播",
+    "prayer": "祷告",
+    "groups": "小组",
+    "kids": "儿童",
+    "mission": "宣教"
+  },
+  "header": {
+    "serviceTime": "周日 10:30",
+    "planVisit": "计划参观",
+    "liveNow": "正在直播"
+  },
+  "footer": {
+    "rights": "版权所有",
+    "privacy": "隐私政策",
+    "cookies": "Cookie政策",
+    "affiliation": "隶属于 Go Love Global"
+  },
+  "home": {
+    "heroTitle": "万国之教会",
+    "heroSubtitle": "欢迎来自各国、各族、各语言的人们在泰国普吉岛一起敬拜。",
+    "heroCtaVisit": "计划参观",
+    "heroCtaSermons": "观看讲道",
+    "serviceTimesTitle": "加入我们",
+    "newHereTitle": "初次来访？",
+    "newHereText": "我们理解参访新教会可能令人感到陌生。让我们帮助您的第一次来访成为美好的体验。",
+    "newHereCta": "了解会发生什么",
+    "upcomingEvents": "即将举行的活动",
+    "latestSermons": "最新讲道",
+    "latestBlog": "博客精选",
+    "alphaCta": "正在探索基督信仰？阿尔法课程即将开始。",
+    "alphaButton": "了解更多",
+    "newsletterTitle": "保持联系",
+    "newsletterText": "获取每周更新、讲道笔记和活动提醒。",
+    "newsletterPlaceholder": "您的电子邮件地址",
+    "newsletterButton": "订阅",
+    "mapTitle": "找到我们"
+  },
+  "visit": {
+    "title": "计划参观",
+    "serviceTimes": "聚会时间",
+    "location": "地点",
+    "parking": "停车",
+    "whatToExpect": "预期体验",
+    "kids": "儿童与家庭",
+    "faq": "常见问题",
+    "rsvp": "告知我们您的到来"
+  },
+  "sermons": {
+    "title": "讲道",
+    "watchOnYoutube": "在YouTube观看",
+    "listenAudio": "收听音频",
+    "downloadNotes": "下载讲道笔记",
+    "series": "系列",
+    "speaker": "讲员",
+    "date": "日期",
+    "noSermons": "未找到讲道。"
+  },
+  "events": {
+    "title": "活动",
+    "rsvp": "报名参加",
+    "location": "地点",
+    "noEvents": "暂无即将举行的活动。"
+  },
+  "blog": {
+    "title": "博客",
+    "readMore": "阅读更多",
+    "noPosts": "未找到文章。"
+  },
+  "give": {
+    "title": "奉献",
+    "amount": "金额（泰铢）",
+    "monthly": "每月奉献",
+    "oneTime": "一次性奉献",
+    "cardPayment": "银行卡支付",
+    "promptPay": "PromptPay（泰国）",
+    "scanQr": "使用银行应用扫描二维码",
+    "donateButton": "立即奉献",
+    "thankYou": "感谢您慷慨的奉献！"
+  },
+  "contact": {
+    "title": "联系我们",
+    "name": "您的姓名",
+    "email": "电子邮件地址",
+    "subject": "主题",
+    "message": "留言",
+    "consent": "我同意存储我的数据以回应我的请求",
+    "submit": "发送消息",
+    "success": "谢谢！我们将尽快与您联系。",
+    "error": "出现问题，请重试。"
+  },
+  "prayer": {
+    "title": "祷告请求",
+    "intro": "我们相信祷告的力量。分享您的请求，我们的团队将为您祷告。",
+    "name": "您的姓名",
+    "email": "电子邮件（可选）",
+    "request": "您的祷告请求",
+    "isPublic": "与会众分享此请求（匿名）",
+    "consent": "我同意为祷告目的存储我的数据",
+    "submit": "提交祷告请求",
+    "success": "您的祷告请求已收到。我们正在为您祷告。"
+  },
+  "newsletter": {
+    "confirmTitle": "请检查您的电子邮件",
+    "confirmText": "我们已向您的电子邮件地址发送了确认链接。请点击它以完成订阅。",
+    "confirmedTitle": "您已订阅！",
+    "confirmedText": "您将收到来自普吉国际教会的更新。",
+    "unsubscribed": "您已成功退订。"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "发生错误",
+    "notFound": "页面未找到",
+    "backHome": "返回首页",
+    "learnMore": "了解更多",
+    "viewAll": "查看全部",
+    "share": "分享",
+    "close": "关闭",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "publish": "发布",
+    "draft": "保存草稿"
+  },
+  "admin": {
+    "dashboard": "仪表板",
+    "posts": "文章",
+    "events": "活动",
+    "sermons": "讲道",
+    "pages": "页面",
+    "staff": "同工",
+    "prayer": "祷告请求",
+    "newsletter": "电子通讯",
+    "media": "媒体",
+    "give": "捐款",
+    "contact": "联系收件箱",
+    "settings": "设置",
+    "users": "管理员用户",
+    "logout": "退出登录",
+    "newPost": "新建文章",
+    "editPost": "编辑文章",
+    "translationTabs": {
+      "en": "英文",
+      "th": "泰文",
+      "ru": "俄文",
+      "zh": "中文",
+      "autoTranslated": "自动翻译",
+      "manuallyEdited": "手动编辑",
+      "retranslate": "从EN重新翻译"
+    }
+  }
+}

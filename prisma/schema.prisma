@@ -1,0 +1,247 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Locale {
+  en
+  th
+  ru
+  zh
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  SCHEDULED
+  ARCHIVED
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+}
+
+enum DonationMethod {
+  STRIPE_CARD
+  PROMPTPAY_QR
+}
+
+enum DonationStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+// ─── Blog Posts ────────────────────────────────────────────────────────────────
+
+model Post {
+  id            Int               @id @default(autoincrement())
+  slug          String            @unique
+  status        ContentStatus     @default(DRAFT)
+  featuredImage String?
+  publishedAt   DateTime?
+  scheduledAt   DateTime?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  translations  PostTranslation[]
+}
+
+model PostTranslation {
+  id               Int     @id @default(autoincrement())
+  postId           Int
+  locale           Locale
+  title            String
+  content          String  @db.Text
+  excerpt          String  @db.Text @default("")
+  isAutoTranslated Boolean @default(false)
+  post             Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, locale])
+}
+
+// ─── Events ────────────────────────────────────────────────────────────────────
+
+model Event {
+  id            Int                @id @default(autoincrement())
+  slug          String             @unique
+  status        ContentStatus      @default(DRAFT)
+  startAt       DateTime
+  endAt         DateTime?
+  location      String             @default("")
+  featuredImage String?
+  isRecurring   Boolean            @default(false)
+  rsvpEnabled   Boolean            @default(false)
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  translations  EventTranslation[]
+  rsvps         EventRsvp[]
+}
+
+model EventTranslation {
+  id               Int     @id @default(autoincrement())
+  eventId          Int
+  locale           Locale
+  title            String
+  description      String  @db.Text @default("")
+  isAutoTranslated Boolean @default(false)
+  event            Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, locale])
+}
+
+model EventRsvp {
+  id        Int      @id @default(autoincrement())
+  eventId   Int
+  name      String
+  email     String
+  locale    Locale   @default(en)
+  createdAt DateTime @default(now())
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}
+
+// ─── Sermons ───────────────────────────────────────────────────────────────────
+
+model Sermon {
+  id           Int                 @id @default(autoincrement())
+  slug         String              @unique
+  status       ContentStatus       @default(DRAFT)
+  series       String              @default("")
+  speakerName  String              @default("")
+  preachedAt   DateTime?
+  videoUrl     String?
+  audioUrl     String?
+  notesUrl     String?
+  thumbnailUrl String?
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  translations SermonTranslation[]
+}
+
+model SermonTranslation {
+  id               Int     @id @default(autoincrement())
+  sermonId         Int
+  locale           Locale
+  title            String
+  description      String  @db.Text @default("")
+  isAutoTranslated Boolean @default(false)
+  sermon           Sermon  @relation(fields: [sermonId], references: [id], onDelete: Cascade)
+
+  @@unique([sermonId, locale])
+}
+
+// ─── Static Pages ──────────────────────────────────────────────────────────────
+
+model Page {
+  id           Int               @id @default(autoincrement())
+  slug         String            @unique
+  status       ContentStatus     @default(DRAFT)
+  showInNav    Boolean           @default(false)
+  navOrder     Int               @default(0)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  translations PageTranslation[]
+}
+
+model PageTranslation {
+  id               Int     @id @default(autoincrement())
+  pageId           Int
+  locale           Locale
+  title            String
+  content          String  @db.Text
+  metaDescription  String  @default("")
+  isAutoTranslated Boolean @default(false)
+  page             Page    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@unique([pageId, locale])
+}
+
+// ─── Staff ─────────────────────────────────────────────────────────────────────
+
+model StaffMember {
+  id       Int     @id @default(autoincrement())
+  name     String
+  role     String
+  bio      String  @db.Text @default("")
+  photoUrl String?
+  email    String?
+  order    Int     @default(0)
+}
+
+// ─── Prayer Requests ───────────────────────────────────────────────────────────
+
+model PrayerRequest {
+  id         Int      @id @default(autoincrement())
+  name       String
+  email      String?
+  request    String   @db.Text
+  isPublic   Boolean  @default(false)
+  isAnswered Boolean  @default(false)
+  locale     Locale   @default(en)
+  createdAt  DateTime @default(now())
+}
+
+// ─── Newsletter ────────────────────────────────────────────────────────────────
+
+model NewsletterSubscriber {
+  id              Int      @id @default(autoincrement())
+  email           String   @unique
+  locale          Locale   @default(en)
+  isActive        Boolean  @default(false)
+  confirmToken    String?  @unique
+  confirmTokenExp DateTime?
+  createdAt       DateTime @default(now())
+}
+
+// ─── Admin Users ───────────────────────────────────────────────────────────────
+
+model AdminUser {
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  name         String
+  passwordHash String
+  role         AdminRole @default(EDITOR)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+// ─── Donations ─────────────────────────────────────────────────────────────────
+
+model Donation {
+  id              Int            @id @default(autoincrement())
+  amount          Int            // in satangs (THB×100) or cents (USD×100)
+  currency        String         @default("THB")
+  method          DonationMethod
+  isRecurring     Boolean        @default(false)
+  status          DonationStatus @default(PENDING)
+  stripePaymentId String?        @unique
+  donorName       String?
+  donorEmail      String?
+  createdAt       DateTime       @default(now())
+}
+
+// ─── Contact Submissions ───────────────────────────────────────────────────────
+
+model ContactSubmission {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  subject   String
+  message   String   @db.Text
+  locale    Locale   @default(en)
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+// ─── Site Settings ─────────────────────────────────────────────────────────────
+
+model SiteSetting {
+  key   String @id
+  value String @db.Text
+}
