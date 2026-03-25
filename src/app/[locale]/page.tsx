@@ -63,7 +63,7 @@ export default async function HomePage({
   return (
     <>
       {/* ─── Hero ──────────────────────────────────────── */}
-      <section className="relative min-h-[80vh] flex items-center">
+      <section className="relative min-h-[45vh] flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
             src="/assets/church/hero.jpg"
