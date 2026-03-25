@@ -1,0 +1,37 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: 65.109.65.205
+          port: 25650
+          username: ubuntu
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            set -e
+            cd /opt/phuketinternationalchurch
+
+            # Pull latest code
+            git fetch origin main
+            git reset --hard origin/main
+
+            # Rebuild and restart
+            docker compose -f docker-compose.server.yml build app
+            docker compose -f docker-compose.server.yml up -d app
+
+            # Reload nginx in case config changed
+            docker exec pms-nginx-1 nginx -s reload || true
+
+            echo "Deploy complete"
