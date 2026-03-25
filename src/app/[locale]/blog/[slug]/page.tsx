@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
 import { prisma } from '@/lib/prisma';
+import { breadcrumbSchema } from '@/lib/schema-org';
 
 type Locale = 'en' | 'th' | 'ru' | 'zh';
 
@@ -20,9 +21,35 @@ export async function generateMetadata({
     });
     if (!post) return { title: 'Post Not Found' };
     const tr = post.translations[0];
+    const title = tr?.title || slug;
+    const image = post.featuredImage || '/assets/church/hero.jpg';
+    const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://phuketinternationalchurch.com';
     return {
-      title: `${tr?.title || slug} — Phuket International Church`,
+      title: `${title} — Phuket International Church`,
       description: tr?.excerpt || undefined,
+      alternates: {
+        canonical: `${SITE_URL}/${locale}/blog/${slug}`,
+        languages: {
+          en: `${SITE_URL}/en/blog/${slug}`,
+          th: `${SITE_URL}/th/blog/${slug}`,
+          ru: `${SITE_URL}/ru/blog/${slug}`,
+          zh: `${SITE_URL}/zh/blog/${slug}`,
+          'x-default': `${SITE_URL}/en/blog/${slug}`,
+        },
+      },
+      openGraph: {
+        title,
+        description: tr?.excerpt || undefined,
+        type: 'article',
+        ...(post.publishedAt && { publishedTime: new Date(post.publishedAt).toISOString() }),
+        images: [{ url: image, alt: title }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description: tr?.excerpt || undefined,
+        images: [image],
+      },
     };
   } catch {
     return { title: 'Blog — Phuket International Church' };
@@ -89,11 +116,21 @@ export default async function BlogPostPage({
     },
   ];
 
+  const crumbsLd = breadcrumbSchema([
+    { name: 'Home', url: `${SITE_URL}/${locale}` },
+    { name: 'Blog', url: `${SITE_URL}/${locale}/blog` },
+    { name: title, url: postUrl },
+  ]);
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbsLd) }}
       />
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import { format } from 'date-fns';
 import LiteYouTubeEmbed from '@/components/ui/LiteYouTubeEmbed';
+import { breadcrumbSchema } from '@/lib/schema-org';
+
+const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://phuketinternationalchurch.com';
 
 type Locale = 'en' | 'th' | 'ru' | 'zh';
 
@@ -33,9 +36,33 @@ export async function generateMetadata({
     });
     if (!sermon) return { title: 'Sermon Not Found' };
     const tr = sermon.translations[0];
+    const title = tr?.title || slug;
+    const image = sermon.thumbnailUrl || '/assets/church/hero.jpg';
     return {
-      title: `${tr?.title || slug} — Phuket International Church`,
+      title: `${title} — Phuket International Church`,
       description: tr?.description || undefined,
+      alternates: {
+        canonical: `${SITE_URL}/${locale}/sermons/${slug}`,
+        languages: {
+          en: `${SITE_URL}/en/sermons/${slug}`,
+          th: `${SITE_URL}/th/sermons/${slug}`,
+          ru: `${SITE_URL}/ru/sermons/${slug}`,
+          zh: `${SITE_URL}/zh/sermons/${slug}`,
+          'x-default': `${SITE_URL}/en/sermons/${slug}`,
+        },
+      },
+      openGraph: {
+        title,
+        description: tr?.description || undefined,
+        type: 'article',
+        images: [{ url: image, alt: title }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description: tr?.description || undefined,
+        images: [image],
+      },
     };
   } catch {
     return { title: 'Sermon — Phuket International Church' };
@@ -64,6 +91,7 @@ export default async function SermonPage({
   const tr = sermon.translations[0];
   const title = tr?.title || sermon.slug;
   const youtubeId = sermon.videoUrl ? extractYouTubeId(sermon.videoUrl) : null;
+  const sermonUrl = `${SITE_URL}/${locale}/sermons/${slug}`;
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -85,11 +113,21 @@ export default async function SermonPage({
     },
   };
 
+  const crumbsLd = breadcrumbSchema([
+    { name: 'Home', url: `${SITE_URL}/${locale}` },
+    { name: 'Sermons', url: `${SITE_URL}/${locale}/sermons` },
+    { name: title, url: sermonUrl },
+  ]);
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbsLd) }}
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
