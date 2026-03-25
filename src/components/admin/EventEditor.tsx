@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 type Locale = 'en' | 'th' | 'ru' | 'zh';
-type ContentStatus = 'DRAFT' | 'PUBLISHED' | 'SCHEDULED';
+type ContentStatus = 'DRAFT' | 'PUBLISHED' | 'SCHEDULED' | 'ARCHIVED';
 
 type LocaleData = { title: string; description: string; isAutoTranslated: boolean };
 type TranslationsState = Record<Locale, LocaleData>;

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import RichTextEditor from './RichTextEditor';
 
 type Locale = 'en' | 'th' | 'ru' | 'zh';
-type ContentStatus = 'DRAFT' | 'PUBLISHED';
+type ContentStatus = 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
 
 type LocaleData = { title: string; content: string; metaDescription: string; isAutoTranslated: boolean };
 type TranslationsState = Record<Locale, LocaleData>;

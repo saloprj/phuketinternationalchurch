@@ -11,7 +11,7 @@ const defaultTranslations: TranslationsState = {
   zh: { title: '', excerpt: '', content: '', isAutoTranslated: false },
 };
 
-type ContentStatus = 'DRAFT' | 'PUBLISHED' | 'SCHEDULED';
+type ContentStatus = 'DRAFT' | 'PUBLISHED' | 'SCHEDULED' | 'ARCHIVED';
 
 type PostEditorProps = {
   postId?: number;
