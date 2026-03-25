@@ -560,7 +560,7 @@ export default async function HomePage({
           </p>
           <div className="rounded-2xl overflow-hidden shadow-md aspect-video max-w-3xl mx-auto">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.869167!2d98.35660!3d7.84670!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sPhuket+International+Church!5e0!3m2!1sen!2sth!4v1"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.6!2d98.3391316!3d7.8409824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30502f960bbd0f7d%3A0x13c402492602b4d2!2sPhuket%20International%20Church!5e0!3m2!1sen!2sth!4v1741878000000"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -572,7 +572,7 @@ export default async function HomePage({
           </div>
           <div className="text-center mt-5">
             <a
-              href="https://maps.app.goo.gl/HDDiRhLv7J2R18kw9?g_st=ic"
+              href="https://maps.app.goo.gl/FwfTGati6eUDsFKLA"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block border border-primary text-primary px-6 py-2.5 rounded-lg font-medium hover:bg-primary hover:text-white transition-colors"
