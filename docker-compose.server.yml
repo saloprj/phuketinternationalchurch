@@ -38,8 +38,6 @@ services:
       NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:-}
     ports:
       - '3005:3000'
-    ports:
-      - '3005:3000'
     volumes:
       - uploads_data:/app/public/uploads
     networks:
