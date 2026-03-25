@@ -20,7 +20,10 @@ export default async function AdminUsersPage() {
 
   return (
     <UsersClient
-      users={users.map(u => ({ ...u, createdAt: u.createdAt.toISOString() }))}
+      users={users.map(u => ({
+        ...u,
+        createdAt: u.createdAt.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
+      }))}
       currentEmail={user.email || ''}
     />
   );
