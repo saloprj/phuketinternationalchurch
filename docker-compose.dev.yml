@@ -25,12 +25,12 @@ services:
       - app_node_modules:/app/node_modules
       - uploads_dev_data:/app/public/uploads
     ports:
-      - '3002:3000'
+      - '3005:3000'
     environment:
       DATABASE_URL: postgresql://pic_user:changeme@postgres:5432/phuketinternationalchurch
       NEXTAUTH_SECRET: dev-secret-change-in-production
-      NEXTAUTH_URL: http://localhost:3002
-      NEXT_PUBLIC_APP_URL: http://localhost:3002
+      NEXTAUTH_URL: http://localhost:3005
+      NEXT_PUBLIC_APP_URL: http://localhost:3005
     depends_on:
       postgres:
         condition: service_healthy
@@ -39,7 +39,7 @@ services:
   umami:
     image: ghcr.io/umami-software/umami:postgresql-latest
     ports:
-      - '3003:3000'
+      - '3006:3000'
     environment:
       DATABASE_URL: postgresql://umami_user:umami_pass@umami_db:5432/umami
       DATABASE_TYPE: postgresql
