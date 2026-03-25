@@ -17,17 +17,17 @@ const nextConfig = {
       { source: '/contact/', destination: '/en/contact', permanent: true },
       { source: '/pray', destination: '/en/prayer', permanent: true },
       { source: '/pray/', destination: '/en/prayer', permanent: true },
-      { source: '/baptism', destination: '/en/baptism', permanent: true },
-      { source: '/baptism/', destination: '/en/baptism', permanent: true },
-      { source: '/mission', destination: '/en/mission', permanent: true },
-      { source: '/mission/', destination: '/en/mission', permanent: true },
-      { source: '/next-steps', destination: '/en/next-steps', permanent: true },
-      { source: '/next-steps/', destination: '/en/next-steps', permanent: true },
+      { source: '/baptism', destination: '/en/visit', permanent: true },
+      { source: '/baptism/', destination: '/en/visit', permanent: true },
+      { source: '/mission', destination: '/en/about', permanent: true },
+      { source: '/mission/', destination: '/en/about', permanent: true },
+      { source: '/next-steps', destination: '/en/visit', permanent: true },
+      { source: '/next-steps/', destination: '/en/visit', permanent: true },
       { source: '/english-church-phuket-all-nations', destination: '/en', permanent: true },
       { source: '/english-church-phuket-all-nations/', destination: '/en', permanent: true },
-      // Old blog post URLs: /2023/slug → /en/blog/slug
-      { source: '/2023/:slug', destination: '/en/blog/:slug', permanent: true },
-      { source: '/2023/:slug/', destination: '/en/blog/:slug', permanent: true },
+      // Old blog post URLs → blog listing (posts not yet in new DB)
+      { source: '/2023/:slug', destination: '/en/blog', permanent: true },
+      { source: '/2023/:slug/', destination: '/en/blog', permanent: true },
     ];
   },
 
