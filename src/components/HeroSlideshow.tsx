@@ -27,7 +27,7 @@ export default function HeroSlideshow({ children }: HeroSlideshowProps) {
   }, []);
 
   return (
-    <section className="relative min-h-[65vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[42vh] flex items-center overflow-hidden">
       {/* Slides */}
       {SLIDES.map((slide, i) => (
         <div
