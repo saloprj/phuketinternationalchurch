@@ -23,6 +23,8 @@ const nextConfig = {
       { source: '/mission/', destination: '/en/about', permanent: true },
       { source: '/next-steps', destination: '/en/visit', permanent: true },
       { source: '/next-steps/', destination: '/en/visit', permanent: true },
+      { source: '/watch', destination: '/en/live', permanent: true },
+      { source: '/watch/', destination: '/en/live', permanent: true },
       { source: '/english-church-phuket-all-nations', destination: '/en', permanent: true },
       { source: '/english-church-phuket-all-nations/', destination: '/en', permanent: true },
       // Old blog post URLs → blog listing (posts not yet in new DB)
