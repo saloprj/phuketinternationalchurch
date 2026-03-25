@@ -15,12 +15,13 @@ export function churchSchema() {
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: 7.8467,
-      longitude: 98.3566,
+      latitude: 7.8409771,
+      longitude: 98.3417119,
     },
     openingHours: ['Su 10:30-11:30', 'Th 18:30-20:00'],
     sameAs: [
-      'https://www.facebook.com/phuketinternationalchurch',
+      'https://www.facebook.com/phuket.international.church',
+      'https://maps.app.goo.gl/FwfTGati6eUDsFKLA',
     ],
   };
 }
