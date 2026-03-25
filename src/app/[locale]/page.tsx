@@ -66,7 +66,7 @@ export default async function HomePage({
       <section className="relative min-h-[80vh] flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/assets/hero.jpeg"
+            src="/assets/church/hero.jpg"
             alt="Phuket International Church congregation worshipping together"
             fill
             className="object-cover brightness-50"
@@ -140,13 +140,70 @@ export default async function HomePage({
             </div>
             <div className="flex-shrink-0">
               <Image
-                src="/assets/entrance.jpg"
-                alt="Church entrance"
+                src="/assets/church/congregation.jpg"
+                alt="Congregation at worship"
                 width={300}
-                height={220}
+                height={400}
                 className="rounded-xl object-cover"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Photo Gallery ──────────────────────────────── */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-text-main mb-8 text-center">Life at PIC</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="relative aspect-video rounded-xl overflow-hidden col-span-2 md:col-span-1 row-span-2">
+              <Image
+                src="/assets/church/worship2.jpg"
+                alt="Worship at Phuket International Church"
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="relative aspect-video rounded-xl overflow-hidden">
+              <Image
+                src="/assets/church/instruments.jpg"
+                alt="Worship band"
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="relative aspect-video rounded-xl overflow-hidden">
+              <Image
+                src="/assets/church/worship1.jpg"
+                alt="Sunday service"
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="relative aspect-video rounded-xl overflow-hidden">
+              <Image
+                src="/assets/church/crowd.jpg"
+                alt="Church community"
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="relative aspect-video rounded-xl overflow-hidden">
+              <Image
+                src="/assets/church/fellowship.jpg"
+                alt="Fellowship meal"
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          </div>
+          <div className="text-center mt-8">
+            <Link
+              href={`/${locale}/visit`}
+              className="inline-block bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors"
+            >
+              Plan Your Visit →
+            </Link>
           </div>
         </div>
       </section>
