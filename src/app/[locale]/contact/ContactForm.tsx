@@ -46,6 +46,7 @@ export default function ContactForm({ locale }: ContactFormProps) {
           email: form.email,
           subject: form.subject,
           message: form.message,
+          consent: form.consent,
           locale,
         }),
       });

@@ -33,7 +33,9 @@ export async function POST(req: NextRequest) {
 
   const result = schema.safeParse(body);
   if (!result.success) {
-    return NextResponse.json({ error: result.error.flatten().fieldErrors }, { status: 400 });
+    const fieldErrors = result.error.flatten().fieldErrors;
+    const firstError = Object.values(fieldErrors).flat()[0];
+    return NextResponse.json({ error: firstError || 'Invalid form data.' }, { status: 400 });
   }
 
   const data = result.data;
