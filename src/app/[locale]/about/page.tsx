@@ -171,6 +171,18 @@ export default async function AboutPage({
           committed to planting multiplying churches that love God, love people,
           and serve the world.
         </p>
+        <div className="my-8 max-w-lg mx-auto">
+          <Image
+            src="/assets/registration-certificate.jpg"
+            alt="Official registration certificate from the Assembly of God Fellowship Thailand"
+            width={1200}
+            height={850}
+            className="rounded-xl shadow-md border border-gray-200"
+          />
+          <p className="text-xs text-gray-400 mt-2">
+            Official registration certificate — valid March 2026 to December 2027
+          </p>
+        </div>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <a
             href={`/${locale}/about/what-we-believe`}
