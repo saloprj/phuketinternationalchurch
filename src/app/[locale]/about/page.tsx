@@ -164,12 +164,27 @@ export default async function AboutPage({
         <h2 className="text-2xl font-bold text-text-main mb-4">
           Our Affiliation
         </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto">
+        <p className="text-gray-600 max-w-2xl mx-auto mb-6">
           Phuket International Church is part of the{' '}
-          <strong>Go Love Global</strong> network of churches, committed to
-          planting multiplying churches that love God, love people, and serve
-          the world.
+          <strong>Go Love Global</strong> network of churches and is affiliated
+          with the <strong>Assembly of God Fellowship Thailand</strong>,
+          committed to planting multiplying churches that love God, love people,
+          and serve the world.
         </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <a
+            href={`/${locale}/about/what-we-believe`}
+            className="inline-flex items-center justify-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-primary-dark transition-colors text-sm"
+          >
+            What We Believe
+          </a>
+          <a
+            href={`/${locale}/bylaws`}
+            className="inline-flex items-center justify-center gap-2 border border-primary text-primary px-5 py-2.5 rounded-lg font-semibold hover:bg-primary/5 transition-colors text-sm"
+          >
+            Church Bylaws
+          </a>
+        </div>
       </section>
     </div>
   );

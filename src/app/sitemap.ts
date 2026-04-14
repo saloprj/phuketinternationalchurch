@@ -37,6 +37,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/next-steps',
     '/privacy-policy',
     '/cookie-policy',
+    '/about/what-we-believe',
+    '/bylaws',
   ];
 
   const staticEntries = staticPaths.flatMap((p) => localizedUrls(p));

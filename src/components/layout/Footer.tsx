@@ -59,6 +59,7 @@ export default async function Footer({ locale }: FooterProps) {
                 { href: `/${locale}/events`, label: tn('events') },
                 { href: `/${locale}/give`, label: tn('give') },
                 { href: `/${locale}/prayer`, label: tn('prayer') },
+                { href: `/${locale}/about/what-we-believe`, label: t('whatWeBelieve') },
               ].map((link) => (
                 <li key={link.href}>
                   <Link
@@ -105,6 +106,9 @@ export default async function Footer({ locale }: FooterProps) {
             </Link>
             <Link href={`/${locale}/cookie-policy`} className="text-xs text-gray-500 hover:text-gray-300 transition-colors">
               {t('cookies')}
+            </Link>
+            <Link href={`/${locale}/bylaws`} className="text-xs text-gray-500 hover:text-gray-300 transition-colors">
+              {t('bylaws')}
             </Link>
           </div>
         </div>
