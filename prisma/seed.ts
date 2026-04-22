@@ -32,7 +32,7 @@ async function main() {
     { key: 'parkingNote', value: 'Parking available; sign in at entrance (write name + "clubhouse")' },
     { key: 'mission', value: 'Make disciples who love God and love their neighbors' },
     { key: 'missionVerse', value: 'Matthew 22:37-40, 28:19-20' },
-    { key: 'affiliation', value: 'Go Love Global' },
+    { key: 'affiliation', value: 'Assemblies of God' },
     { key: 'liveStreamUrl', value: '' },
     { key: 'announcementBanner', value: '' },
     { key: 'facebookUrl', value: 'https://www.facebook.com/phuketinternationalchurch' },
@@ -193,7 +193,7 @@ async function main() {
       showInNav: true,
       navOrder: 1,
       title: 'About Us',
-      content: '<h2>Who We Are</h2><p>Phuket International Church is an international, multicultural church located in the heart of Phuket, Thailand. We are affiliated with Go Love Global and are committed to the mission of making disciples who love God and love their neighbors.</p>',
+      content: '<h2>Who We Are</h2><p>Phuket International Church is an international, multicultural church located in the heart of Phuket, Thailand. We are affiliated with the Assemblies of God and are committed to the mission of making disciples who love God and love their neighbors.</p>',
     },
     {
       slug: 'visit',

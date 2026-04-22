@@ -51,8 +51,8 @@ export default async function AboutPage({
           <p>
             Phuket International Church is an international, multicultural
             church located in the heart of Phuket, Thailand. We are affiliated
-            with Go Love Global and are committed to the mission of making
-            disciples who love God and love their neighbors.
+            with the Assemblies of God and are committed to the mission of
+            making disciples who love God and love their neighbors.
           </p>
           <p>
             Our congregation includes people from Thailand, Russia, China, the
@@ -173,11 +173,10 @@ export default async function AboutPage({
           Our Affiliation
         </h2>
         <p className="text-gray-600 max-w-2xl mx-auto mb-6">
-          Phuket International Church is part of the{' '}
-          <strong>Go Love Global</strong> network of churches and is affiliated
-          with the <strong>Assembly of God Fellowship Thailand</strong>,
-          committed to planting multiplying churches that love God, love people,
-          and serve the world.
+          Phuket International Church is affiliated with the{' '}
+          <strong>Assembly of God Fellowship Thailand</strong>, committed to
+          planting multiplying churches that love God, love people, and serve
+          the world.
         </p>
         <div className="my-8 max-w-lg mx-auto">
           <Image
