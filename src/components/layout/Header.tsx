@@ -18,6 +18,8 @@ export default function Header({ locale }: HeaderProps) {
   const navLinks = [
     { href: `/${locale}`, label: t('home') },
     { href: `/${locale}/about`, label: t('about') },
+    { href: `/${locale}/groups`, label: t('groups') },
+    { href: `/${locale}/serving`, label: t('serving') },
     { href: `/${locale}/sermons`, label: t('sermons') },
     { href: `/${locale}/events`, label: t('events') },
     { href: `/${locale}/blog`, label: t('blog') },
@@ -42,12 +44,12 @@ export default function Header({ locale }: HeaderProps) {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+          <nav className="hidden lg:flex items-center gap-0.5" aria-label="Main navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-3 py-2 text-sm font-medium text-text-main hover:text-primary transition-colors rounded-md hover:bg-gray-50"
+                className="px-2 py-2 text-sm font-medium text-text-main hover:text-primary transition-colors rounded-md hover:bg-gray-50 whitespace-nowrap"
               >
                 {link.label}
               </Link>
@@ -57,7 +59,7 @@ export default function Header({ locale }: HeaderProps) {
           {/* Right side */}
           <div className="hidden lg:flex items-center gap-3">
             {/* Service time chip */}
-            <span className="text-xs text-gray-500 font-medium border border-gray-200 rounded-full px-3 py-1">
+            <span className="hidden xl:inline-flex text-xs text-gray-500 font-medium border border-gray-200 rounded-full px-3 py-1 whitespace-nowrap">
               ☀️ {th('serviceTime')}
             </span>
 
@@ -65,7 +67,7 @@ export default function Header({ locale }: HeaderProps) {
 
             <Link
               href={`/${locale}/visit`}
-              className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors"
+              className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors whitespace-nowrap"
             >
               {th('planVisit')}
             </Link>
