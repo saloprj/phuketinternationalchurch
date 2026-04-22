@@ -57,11 +57,21 @@ export default async function SermonsPage({
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div className="mb-10">
-        <h1 className="text-4xl font-bold text-text-main mb-3">Sermons</h1>
-        <p className="text-gray-600 text-lg">
-          Messages from Phuket International Church
-        </p>
+      <div className="mb-10 rounded-2xl overflow-hidden relative aspect-[16/6]">
+        <Image
+          src="/images/church/bill-preaching.jpg"
+          alt="Sermon at Phuket International Church"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/20" />
+        <div className="relative z-10 h-full flex flex-col justify-end p-8">
+          <h1 className="text-4xl font-bold text-white mb-2">Sermons</h1>
+          <p className="text-white/90 text-lg">
+            Messages from Phuket International Church
+          </p>
+        </div>
       </div>
 
       {sermons.length === 0 ? (

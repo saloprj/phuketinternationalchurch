@@ -124,6 +124,15 @@ export default async function AboutPage({
       {staff.length > 0 && (
         <section>
           <h2 className="text-3xl font-bold text-text-main mb-8">Our Team</h2>
+          <div className="mb-10 rounded-2xl overflow-hidden">
+            <Image
+              src="/images/church/team-2026.jpg"
+              alt="Phuket International Church leadership team"
+              width={1600}
+              height={1067}
+              className="w-full h-auto object-cover"
+            />
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {staff.map((member) => (
               <div key={member.id} className="text-center">

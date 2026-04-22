@@ -5,6 +5,8 @@ import Image from 'next/image';
 
 const SLIDES = [
   { src: '/assets/church/hero.jpg', alt: 'Phuket International Church congregation' },
+  { src: '/images/church/baptism-crowd.jpg', alt: 'Community gathered for a baptism' },
+  { src: '/images/church/baptism-pool.jpg', alt: 'Baptism at PIC' },
   { src: '/assets/church/worship2.jpg', alt: 'Worship at PIC' },
   { src: '/assets/church/congregation.jpg', alt: 'Sunday service congregation' },
   { src: '/assets/church/crowd.jpg', alt: 'Church community gathering' },

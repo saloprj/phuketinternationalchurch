@@ -64,12 +64,24 @@ export default async function GroupsPage({
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h1 className="text-4xl font-bold text-[#303232] mb-4">
-        {intro?.title || 'Home Fellowship'}
-      </h1>
-      <p className="text-lg text-gray-600 mb-10 max-w-3xl">
-        Join one of our home groups and be part of a loving community.
-      </p>
+      <div className="mb-10 rounded-2xl overflow-hidden relative aspect-[16/6]">
+        <Image
+          src="/images/church/baptism-crowd.jpg"
+          alt="PIC community gathered together"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/20" />
+        <div className="relative z-10 h-full flex flex-col justify-end p-8">
+          <h1 className="text-4xl font-bold text-white mb-2">
+            {intro?.title || 'Home Fellowship'}
+          </h1>
+          <p className="text-white/90 text-lg max-w-2xl">
+            Join one of our home groups and be part of a loving community.
+          </p>
+        </div>
+      </div>
 
       {intro?.content && (
         <div

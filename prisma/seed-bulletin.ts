@@ -28,7 +28,7 @@ async function seedStaff() {
       name: 'Pastor Bonnie',
       role: 'Pastor — Ladies Ministry & Chalong English Group',
       bio: '',
-      photoUrl: null,
+      photoUrl: '/images/church/bill-bonnie-portrait.jpg',
       email: null,
       order: 2,
     },
