@@ -166,12 +166,41 @@ model PageTranslation {
 
 model StaffMember {
   id       Int     @id @default(autoincrement())
-  name     String
+  name     String  @unique
   role     String
   bio      String  @db.Text @default("")
   photoUrl String?
   email    String?
   order    Int     @default(0)
+}
+
+// ─── Home Fellowship Groups ────────────────────────────────────────────────────
+
+model HomeGroup {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  leaderName  String
+  leaderPhone String   @default("")
+  meetingDay  String   @default("")
+  meetingTime String   @default("")
+  location    String   @default("")
+  gpsUrl      String   @default("")
+  photos      String[] @default([])
+  description String   @db.Text @default("")
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+}
+
+// ─── Ministries / Serving Areas ────────────────────────────────────────────────
+
+model Ministry {
+  id          Int    @id @default(autoincrement())
+  name        String @unique
+  description String @db.Text @default("")
+  icon        String @default("")
+  leaderName  String @default("")
+  leaderEmail String @default("")
+  order       Int    @default(0)
 }
 
 // ─── Prayer Requests ───────────────────────────────────────────────────────────

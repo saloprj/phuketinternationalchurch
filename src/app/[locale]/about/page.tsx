@@ -148,6 +148,14 @@ export default async function AboutPage({
                 )}
                 <h3 className="font-bold text-text-main">{member.name}</h3>
                 <p className="text-sm text-gray-500">{member.role}</p>
+                {member.email && (
+                  <a
+                    href={`mailto:${member.email}`}
+                    className="text-xs text-primary hover:underline mt-1 inline-block"
+                  >
+                    {member.email}
+                  </a>
+                )}
                 {member.bio && (
                   <p className="text-xs text-gray-400 mt-1 line-clamp-2">
                     {member.bio}
