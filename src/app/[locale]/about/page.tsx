@@ -31,6 +31,7 @@ export default async function AboutPage({
     bio: string;
     photoUrl: string | null;
     email: string | null;
+    phone: string | null;
     order: number;
   }[] = [];
   try {
@@ -164,6 +165,9 @@ export default async function AboutPage({
                   >
                     {member.email}
                   </a>
+                )}
+                {member.phone && (
+                  <p className="text-xs text-gray-500 mt-1">{member.phone}</p>
                 )}
                 {member.bio && (
                   <p className="text-xs text-gray-400 mt-1 line-clamp-2">

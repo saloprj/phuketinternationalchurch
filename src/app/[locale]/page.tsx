@@ -9,6 +9,10 @@ import LiteYouTubeEmbed from '@/components/ui/LiteYouTubeEmbed';
 
 type Locale = 'en' | 'th' | 'ru' | 'zh';
 
+// Replace with the actual YouTube URL or ID for the Life at PIC video.
+// If left as the placeholder string, the video embed is not rendered.
+const LIFE_AT_PIC_YOUTUBE_ID = 'TBD-REPLACE-ME';
+
 export async function generateMetadata({
   params,
 }: {
@@ -23,7 +27,7 @@ export async function generateMetadata({
 }
 
 async function getHomeData(locale: Locale) {
-  const [posts, events, sermons, youtubeSetting] = await Promise.all([
+  const [posts, events, sermons, youtubeSetting, leadPastor] = await Promise.all([
     prisma.post.findMany({
       where: { status: 'PUBLISHED' },
       include: { translations: { where: { locale } } },
@@ -43,8 +47,15 @@ async function getHomeData(locale: Locale) {
       take: 3,
     }),
     prisma.siteSetting.findUnique({ where: { key: 'youtubeUrl' } }),
+    prisma.staffMember.findFirst({ where: { role: 'Lead Pastor' } }),
   ]);
-  return { posts, events, sermons, youtubeUrl: youtubeSetting?.value || '' };
+  return {
+    posts,
+    events,
+    sermons,
+    youtubeUrl: youtubeSetting?.value || '',
+    leadPastor,
+  };
 }
 
 function extractYouTubeId(url: string): string | null {
@@ -68,6 +79,12 @@ export default async function HomePage({
     events: [] as any[],
     sermons: [] as any[],
     youtubeUrl: '',
+    leadPastor: null as null | {
+      name: string;
+      role: string;
+      bio: string;
+      photoUrl: string | null;
+    },
   };
   try {
     data = await getHomeData(locale as Locale);
@@ -124,6 +141,38 @@ export default async function HomePage({
           </div>
         </div>
       </section>
+
+      {/* ─── Lead Pastor ────────────────────────────────── */}
+      {data.leadPastor?.photoUrl && (
+        <section className="bg-white py-16">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="flex-shrink-0">
+                <Image
+                  src={data.leadPastor.photoUrl}
+                  alt={data.leadPastor.name}
+                  width={240}
+                  height={240}
+                  className="w-48 h-48 md:w-60 md:h-60 rounded-full object-cover shadow-md"
+                />
+              </div>
+              <div className="flex-1 text-center md:text-left">
+                <span className="inline-block bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full mb-3">
+                  {data.leadPastor.role}
+                </span>
+                <h2 className="text-3xl font-bold text-text-main mb-3">
+                  {data.leadPastor.name}
+                </h2>
+                {data.leadPastor.bio && (
+                  <p className="text-gray-600 text-lg leading-relaxed max-w-2xl">
+                    {data.leadPastor.bio}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ─── Service Times ─────────────────────────────── */}
       <section className="bg-primary text-white py-12">
@@ -209,13 +258,20 @@ export default async function HomePage({
                 {t('newHereCta')} →
               </Link>
             </div>
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 grid grid-cols-2 gap-3">
               <Image
                 src="/assets/church/congregation.jpg"
                 alt="Congregation at worship"
-                width={300}
-                height={400}
-                className="rounded-xl object-cover shadow-md"
+                width={240}
+                height={320}
+                className="w-full h-48 sm:h-64 rounded-xl object-cover shadow-md"
+              />
+              <Image
+                src="/images/church/baptism-crowd.jpg"
+                alt="PIC community gathered"
+                width={240}
+                height={320}
+                className="w-full h-48 sm:h-64 rounded-xl object-cover shadow-md"
               />
             </div>
           </div>
@@ -281,6 +337,14 @@ export default async function HomePage({
             <h2 className="text-3xl font-bold text-text-main mb-2">Life at PIC</h2>
             <p className="text-gray-500">{t('gallerySubtitle')}</p>
           </div>
+          {LIFE_AT_PIC_YOUTUBE_ID !== 'TBD-REPLACE-ME' && (
+            <div className="mb-8 rounded-2xl overflow-hidden shadow-lg max-w-4xl mx-auto">
+              <LiteYouTubeEmbed
+                videoId={LIFE_AT_PIC_YOUTUBE_ID}
+                title="Life at PIC"
+              />
+            </div>
+          )}
           {/* Bento grid */}
           <div className="grid grid-cols-12 gap-3">
             {/* Large featured photo */}
