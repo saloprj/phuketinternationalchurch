@@ -1,17 +1,13 @@
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { prisma } from '@/lib/prisma';
+import { waLink } from '@/lib/phone';
 
 export const metadata: Metadata = {
   title: 'Home Fellowship Groups — Phuket International Church',
   description:
     'Join one of our home groups and be part of a loving community. Meeting times, locations, and leaders across Phuket.',
 };
-
-function waLink(phone: string): string {
-  const digits = phone.replace(/\D/g, '');
-  return digits ? `https://wa.me/${digits}` : '';
-}
 
 export default async function GroupsPage({
   params,
@@ -154,6 +150,21 @@ export default async function GroupsPage({
               </div>
               {g.description && (
                 <p className="text-sm text-gray-600 mb-4">{g.description}</p>
+              )}
+              {g.photos.length > 1 && (
+                <div className="grid grid-cols-3 gap-2 mb-4">
+                  {g.photos.slice(1, 4).map((src, i) => (
+                    <div key={src} className="relative aspect-square rounded-lg overflow-hidden">
+                      <Image
+                        src={src}
+                        alt={`${g.name} ${i + 2}`}
+                        fill
+                        sizes="15vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
               )}
               <div className="mt-auto flex flex-wrap gap-2">
                 {g.gpsUrl && (
