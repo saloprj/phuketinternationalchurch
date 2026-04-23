@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { faqSchema } from '@/lib/schema-org';
+import { prisma } from '@/lib/prisma';
+import { waLink } from '@/lib/phone';
 
 export async function generateMetadata({
   params,
@@ -46,6 +48,24 @@ export default async function VisitPage({
 }) {
   const { locale } = await params;
   const jsonLd = faqSchema(faqs);
+
+  let groups: {
+    id: number;
+    name: string;
+    leaderName: string;
+    leaderPhone: string;
+    meetingDay: string;
+    meetingTime: string;
+    location: string;
+  }[] = [];
+  try {
+    groups = await prisma.homeGroup.findMany({
+      where: { isActive: true },
+      orderBy: { order: 'asc' },
+    });
+  } catch {
+    // DB unavailable during build
+  }
 
   return (
     <>
@@ -162,55 +182,67 @@ export default async function VisitPage({
           </div>
         </section>
 
-        {/* What to Expect */}
+        {/* Sunday Morning 10:30 + Cell Groups */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-text-main mb-6">
-            What to Expect
+            Sunday Morning 10:30
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                icon: (
-                  <path d="M9 19V6l12-3v13M9 19c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm12-3c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z" />
-                ),
-                title: 'Worship',
-                text: 'We sing contemporary worship songs in English. The atmosphere is warm and welcoming — come as you are.',
-              },
-              {
-                icon: (
-                  <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                ),
-                title: 'Teaching',
-                text: 'Our messages are Bible-based, practical, and delivered in English. Topics range from everyday life to deep theological exploration.',
-              },
-              {
-                icon: (
-                  <path d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-                ),
-                title: 'Community',
-                text: 'After the service we hang around for coffee and conversation. It is a great way to meet people from 30+ nations.',
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6"
-              >
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                  <svg
-                    className="w-5 h-5 text-primary"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                  >
-                    {item.icon}
-                  </svg>
-                </div>
-                <h3 className="font-bold text-text-main mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-600">{item.text}</p>
-              </div>
-            ))}
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
+            <p className="text-gray-700 leading-relaxed">
+              Our main weekly gathering is <strong>Sunday at 10:30 AM</strong> —
+              contemporary worship in English, a Bible-based message, and
+              coffee &amp; conversation afterwards. Come as you are.
+            </p>
           </div>
+
+          <h3 className="text-xl font-bold text-text-main mb-4">
+            Cell Groups — During the Week
+          </h3>
+          {groups.length > 0 ? (
+            <div className="overflow-x-auto bg-white rounded-2xl shadow-sm border border-gray-100">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-gray-50 text-left text-gray-500 uppercase text-xs tracking-wider">
+                    <th className="px-4 py-3 font-semibold">Group</th>
+                    <th className="px-4 py-3 font-semibold">When</th>
+                    <th className="px-4 py-3 font-semibold">Where</th>
+                    <th className="px-4 py-3 font-semibold">Leader</th>
+                    <th className="px-4 py-3 font-semibold">WhatsApp</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {groups.map((g) => (
+                    <tr key={g.id} className="text-gray-700">
+                      <td className="px-4 py-3 font-medium text-text-main">{g.name}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        {g.meetingDay} {g.meetingTime}
+                      </td>
+                      <td className="px-4 py-3">{g.location}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{g.leaderName}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        {waLink(g.leaderPhone) ? (
+                          <a
+                            href={waLink(g.leaderPhone)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary hover:underline font-medium"
+                          >
+                            {g.leaderPhone}
+                          </a>
+                        ) : (
+                          <span>{g.leaderPhone}</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <p className="text-gray-500 text-sm">
+              Cell group information is being updated — please check back soon.
+            </p>
+          )}
         </section>
 
         {/* Kids Program */}
