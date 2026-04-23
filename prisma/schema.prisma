@@ -171,6 +171,7 @@ model StaffMember {
   bio      String  @db.Text @default("")
   photoUrl String?
   email    String?
+  phone    String?
   order    Int     @default(0)
 }
 

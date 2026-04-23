@@ -18,10 +18,11 @@ async function seedStaff() {
   const staff = [
     {
       name: 'Pastor Bill Yacko',
-      role: 'Senior Pastor',
-      bio: 'Senior Pastor of Phuket International Church.',
+      role: 'Lead Pastor',
+      bio: 'Lead Pastor of Phuket International Church.',
       photoUrl: '/images/pastor-bill.jpg',
       email: 'byacko@gmail.com',
+      phone: '+66 63 454 6790',
       order: 1,
     },
     {
@@ -30,6 +31,7 @@ async function seedStaff() {
       bio: '',
       photoUrl: '/images/church/bill-bonnie-portrait.jpg',
       email: null,
+      phone: '+66 63 454 6927',
       order: 2,
     },
     {
@@ -38,14 +40,16 @@ async function seedStaff() {
       bio: '',
       photoUrl: null,
       email: null,
+      phone: '+66 62 305 0286',
       order: 3,
     },
     {
       name: 'Pastor Benz',
-      role: 'Pastor — Rawai Home Group',
+      role: 'Pastor — Worship Team & Rawai Home Group',
       bio: '',
-      photoUrl: null,
+      photoUrl: '/images/church/team-2026.jpg',
       email: null,
+      phone: '+66 83 640 4483',
       order: 4,
     },
   ];
@@ -58,6 +62,7 @@ async function seedStaff() {
         bio: s.bio,
         photoUrl: s.photoUrl,
         email: s.email,
+        phone: s.phone,
         order: s.order,
       },
       create: s,
@@ -69,22 +74,14 @@ async function seedStaff() {
 async function seedHomeGroups() {
   const groups = [
     {
-      name: 'Youth Ministry',
-      leaderName: 'Pastor Dan Skitch',
-      leaderPhone: '+66 62 305 0286',
-      meetingDay: 'Tuesday',
-      meetingTime: '6:00 PM',
-      location: 'Skitches home, Land & Houses',
-      order: 1,
-    },
-    {
       name: "Men's Group",
       leaderName: 'Pastor Bill Yacko',
       leaderPhone: '+66 63 454 6790',
       meetingDay: 'Thursday',
       meetingTime: '10:00 AM',
       location: "Pastor Bill's home",
-      order: 2,
+      photos: ['/images/church/bill-preaching.jpg', '/images/church/team-2026.jpg'],
+      order: 1,
     },
     {
       name: 'Chalong English Group',
@@ -93,16 +90,18 @@ async function seedHomeGroups() {
       meetingDay: 'Tuesday',
       meetingTime: '6:00 PM',
       location: 'Land & House Chalong',
-      order: 3,
+      photos: ['/images/church/bill-bonnie-portrait.jpg'],
+      order: 2,
     },
     {
       name: 'Rawai Home Group',
       leaderName: 'Pastor Benz',
       leaderPhone: '+66 83 640 4483',
       meetingDay: 'Thursday',
-      meetingTime: '5:30 PM',
+      meetingTime: '6:30 PM',
       location: "Rafael & Aurea's Home, Rawai",
-      order: 4,
+      photos: ['/images/church/team-2026.jpg'],
+      order: 3,
     },
     {
       name: 'Warriors for Christ',
@@ -111,7 +110,8 @@ async function seedHomeGroups() {
       meetingDay: 'Tuesday',
       meetingTime: '10:00 AM',
       location: 'Soi Taed',
-      order: 5,
+      photos: ['/images/church/baptism-pool.jpg'],
+      order: 4,
     },
     {
       name: 'Thai Group',
@@ -120,7 +120,8 @@ async function seedHomeGroups() {
       meetingDay: 'Thursday',
       meetingTime: '6:00 PM',
       location: 'Chalong',
-      order: 6,
+      photos: ['/images/church/baptism-crowd.jpg'],
+      order: 5,
     },
     {
       name: 'Chinese Group',
@@ -129,7 +130,8 @@ async function seedHomeGroups() {
       meetingDay: 'Wednesday',
       meetingTime: '6:00 PM',
       location: "Ms. Malee's house",
-      order: 7,
+      photos: ['/images/church/baby-dedication.jpg'],
+      order: 6,
     },
     {
       name: 'Russian Group',
@@ -138,6 +140,17 @@ async function seedHomeGroups() {
       meetingDay: 'Thursday',
       meetingTime: '6:00 PM',
       location: 'Nai Harn',
+      photos: ['/images/church/hero.jpg'],
+      order: 7,
+    },
+    {
+      name: 'Youth Ministry',
+      leaderName: 'Pastor Dan Skitch',
+      leaderPhone: '+66 62 305 0286',
+      meetingDay: 'Tuesday',
+      meetingTime: '6:00 PM',
+      location: 'Skitches home, Land & Houses',
+      photos: ['/images/church/team-2026.jpg'],
       order: 8,
     },
   ];
@@ -146,7 +159,6 @@ async function seedHomeGroups() {
     const data = {
       ...g,
       gpsUrl: gpsFor(g.location),
-      photos: [],
       description: '',
       isActive: true,
     };
@@ -159,6 +171,7 @@ async function seedHomeGroups() {
         meetingTime: data.meetingTime,
         location: data.location,
         gpsUrl: data.gpsUrl,
+        photos: data.photos,
         order: data.order,
         isActive: data.isActive,
       },
@@ -169,42 +182,59 @@ async function seedHomeGroups() {
 }
 
 async function seedMinistries() {
+  // Remove the old single "Music Ministry" — we now split it into
+  // "Worship Team" (leader Pastor Benz) + "Music Team — Musicians".
+  await prisma.ministry.deleteMany({ where: { name: 'Music Ministry' } });
+
   const ministries = [
     {
       name: 'Guest Service Team',
       description: 'Usher, greeter, coffee setup, and chair setup for Sunday services.',
       icon: 'HandHeart',
+      leaderName: '',
       order: 1,
     },
     {
       name: 'Media / Sound / Projector',
       description: 'Run sound, slides, and recording for Sunday services.',
       icon: 'Radio',
+      leaderName: '',
       order: 2,
+    },
+    {
+      name: 'Worship Team',
+      description: 'Sing on the worship team on Sunday mornings.',
+      icon: 'Music',
+      leaderName: 'Pastor Benz',
+      order: 3,
+    },
+    {
+      name: 'Music Team — Musicians',
+      description: 'Play an instrument on the worship team.',
+      icon: 'Music',
+      leaderName: '',
+      order: 4,
     },
     {
       name: 'Small Group Leader',
       description: 'Lead a home fellowship group during the week.',
       icon: 'Users',
-      order: 3,
+      leaderName: '',
+      order: 5,
     },
     {
       name: "Children's Ministry",
       description: 'Teach and care for children during the Sunday service.',
       icon: 'Baby',
-      order: 4,
-    },
-    {
-      name: 'Music Ministry',
-      description: 'Sing or play an instrument on the worship team.',
-      icon: 'Music',
-      order: 5,
+      leaderName: '',
+      order: 6,
     },
     {
       name: 'Youth Ministry',
       description: 'Mentor and walk alongside youth on Tuesday evenings.',
       icon: 'Sparkles',
-      order: 6,
+      leaderName: 'Pastor Dan Skitch',
+      order: 7,
     },
   ];
 
@@ -214,9 +244,10 @@ async function seedMinistries() {
       update: {
         description: m.description,
         icon: m.icon,
+        leaderName: m.leaderName,
         order: m.order,
       },
-      create: { ...m, leaderName: '', leaderEmail: '' },
+      create: { ...m, leaderEmail: '' },
     });
   }
   console.log(`✓ Ministries: ${ministries.length} upserted`);
