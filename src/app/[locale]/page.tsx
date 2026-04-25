@@ -244,8 +244,8 @@ export default async function HomePage({
       {/* ─── New Here ──────────────────────────────────── */}
       <section className="bg-gray-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl shadow-sm p-8 sm:p-12 flex flex-col sm:flex-row items-center gap-8">
-            <div className="flex-1 border-l-4 border-accent pl-8">
+          <div className="bg-white rounded-2xl shadow-sm p-8 sm:p-12 grid md:grid-cols-2 gap-8 items-center">
+            <div className="border-l-4 border-accent pl-8">
               <span className="inline-block bg-accent/20 text-accent text-sm font-semibold px-3 py-1 rounded-full mb-4">
                 New to PIC?
               </span>
@@ -258,20 +258,20 @@ export default async function HomePage({
                 {t('newHereCta')} →
               </Link>
             </div>
-            <div className="flex-shrink-0 grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3">
               <Image
                 src="/assets/church/congregation.jpg"
                 alt="Congregation at worship"
-                width={240}
-                height={320}
-                className="w-full h-48 sm:h-64 rounded-xl object-cover shadow-md"
+                width={480}
+                height={640}
+                className="w-full h-56 sm:h-72 rounded-xl object-cover shadow-md"
               />
               <Image
                 src="/images/church/baptism-crowd.jpg"
                 alt="PIC community gathered"
-                width={240}
-                height={320}
-                className="w-full h-48 sm:h-64 rounded-xl object-cover shadow-md"
+                width={480}
+                height={640}
+                className="w-full h-56 sm:h-72 rounded-xl object-cover shadow-md"
               />
             </div>
           </div>
