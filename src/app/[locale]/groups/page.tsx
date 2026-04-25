@@ -2,6 +2,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { prisma } from '@/lib/prisma';
 import { waLink } from '@/lib/phone';
+import { GroupHero, GroupThumbs } from '@/components/groups/GroupGallery';
 
 export const metadata: Metadata = {
   title: 'Home Fellowship Groups — Phuket International Church',
@@ -93,15 +94,7 @@ export default async function GroupsPage({
             className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col"
           >
             {g.photos.length > 0 ? (
-              <div className="relative h-48 w-full bg-gray-100">
-                <Image
-                  src={g.photos[0]}
-                  alt={g.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover"
-                />
-              </div>
+              <GroupHero photos={g.photos} name={g.name} />
             ) : (
               <div className="h-48 w-full bg-gradient-to-br from-primary/10 to-primary/30 flex items-center justify-center">
                 <svg
@@ -151,21 +144,7 @@ export default async function GroupsPage({
               {g.description && (
                 <p className="text-sm text-gray-600 mb-4">{g.description}</p>
               )}
-              {g.photos.length > 1 && (
-                <div className="grid grid-cols-3 gap-2 mb-4">
-                  {g.photos.slice(1, 4).map((src, i) => (
-                    <div key={src} className="relative aspect-square rounded-lg overflow-hidden">
-                      <Image
-                        src={src}
-                        alt={`${g.name} ${i + 2}`}
-                        fill
-                        sizes="15vw"
-                        className="object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
+              <GroupThumbs photos={g.photos} name={g.name} />
               <div className="mt-auto flex flex-wrap gap-2">
                 {g.gpsUrl && (
                   <a

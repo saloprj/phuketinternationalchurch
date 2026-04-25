@@ -130,7 +130,11 @@ async function seedHomeGroups() {
       meetingDay: 'Wednesday',
       meetingTime: '6:00 PM',
       location: "Ms. Malee's house",
-      photos: ['/images/church/baby-dedication.jpg'],
+      photos: [
+        '/images/groups/chinese/1.jpg',
+        '/images/groups/chinese/2.jpg',
+        '/images/groups/chinese/3.jpg',
+      ],
       order: 6,
     },
     {
