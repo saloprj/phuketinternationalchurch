@@ -127,7 +127,7 @@ export default async function AboutPage({
           <h2 className="text-3xl font-bold text-text-main mb-8">Our Team</h2>
           <div className="mb-10 rounded-2xl overflow-hidden">
             <Image
-              src="/images/church/team-2026.jpg"
+              src="/images/church/our-team.jpg"
               alt="Phuket International Church leadership team"
               width={1600}
               height={1067}

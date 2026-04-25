@@ -80,8 +80,9 @@ async function seedHomeGroups() {
       meetingDay: 'Thursday',
       meetingTime: '10:00 AM',
       location: "Pastor Bill's home",
-      photos: ['/images/church/bill-preaching.jpg', '/images/church/team-2026.jpg'],
+      photos: ['/images/groups/mens/1.jpg'],
       order: 1,
+      isActive: true,
     },
     {
       name: 'Chalong English Group',
@@ -146,6 +147,7 @@ async function seedHomeGroups() {
       location: 'Nai Harn',
       photos: ['/images/church/hero.jpg'],
       order: 7,
+      isActive: false,
     },
     {
       name: 'Youth Ministry',
@@ -161,10 +163,10 @@ async function seedHomeGroups() {
 
   for (const g of groups) {
     const data = {
-      ...g,
       gpsUrl: gpsFor(g.location),
       description: '',
       isActive: true,
+      ...g,
     };
     await prisma.homeGroup.upsert({
       where: { name: g.name },
