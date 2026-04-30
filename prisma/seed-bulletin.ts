@@ -120,7 +120,12 @@ async function seedHomeGroups() {
       meetingDay: 'Tuesday',
       meetingTime: '10:00 AM',
       location: 'Soi Taed',
-      photos: ['/images/church/baptism-pool.jpg'],
+      photos: [
+        '/images/groups/warriors/1.jpg',
+        '/images/groups/warriors/2.jpg',
+        '/images/groups/warriors/3.jpg',
+        '/images/groups/warriors/4.jpg',
+      ],
       order: 4,
     },
     {
