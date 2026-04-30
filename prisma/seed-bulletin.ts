@@ -83,8 +83,6 @@ async function seedHomeGroups() {
       photos: [
         '/images/groups/mens/1.jpg',
         '/images/groups/mens/2.jpg',
-        '/images/groups/mens/3.jpg',
-        '/images/groups/mens/4.jpg',
         '/images/groups/mens/5.jpg',
         '/images/groups/mens/6.jpg',
       ],
@@ -132,7 +130,7 @@ async function seedHomeGroups() {
       meetingDay: 'Thursday',
       meetingTime: '6:00 PM',
       location: 'Chalong',
-      photos: ['/images/church/baptism-crowd.jpg'],
+      photos: ['/images/groups/thai/1.jpg'],
       order: 5,
     },
     {
