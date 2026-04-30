@@ -55,7 +55,7 @@ function Lightbox({
           e.stopPropagation();
           onClose();
         }}
-        className="absolute top-4 right-4 text-white/80 hover:text-white text-3xl leading-none w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10"
+        className="absolute top-4 right-4 z-10 text-white/80 hover:text-white text-3xl leading-none w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10"
         aria-label="Close"
       >
         ×
@@ -68,7 +68,7 @@ function Lightbox({
               e.stopPropagation();
               prev();
             }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white w-12 h-12 flex items-center justify-center rounded-full hover:bg-white/10 text-2xl"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white/80 hover:text-white w-12 h-12 flex items-center justify-center rounded-full hover:bg-white/10 text-2xl"
             aria-label="Previous"
           >
             ‹
@@ -79,7 +79,7 @@ function Lightbox({
               e.stopPropagation();
               next();
             }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white w-12 h-12 flex items-center justify-center rounded-full hover:bg-white/10 text-2xl"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-white/80 hover:text-white w-12 h-12 flex items-center justify-center rounded-full hover:bg-white/10 text-2xl"
             aria-label="Next"
           >
             ›
