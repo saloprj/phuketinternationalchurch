@@ -80,7 +80,14 @@ async function seedHomeGroups() {
       meetingDay: 'Thursday',
       meetingTime: '10:00 AM',
       location: "Pastor Bill's home",
-      photos: ['/images/groups/mens/1.jpg'],
+      photos: [
+        '/images/groups/mens/1.jpg',
+        '/images/groups/mens/2.jpg',
+        '/images/groups/mens/3.jpg',
+        '/images/groups/mens/4.jpg',
+        '/images/groups/mens/5.jpg',
+        '/images/groups/mens/6.jpg',
+      ],
       order: 1,
       isActive: true,
     },
@@ -101,7 +108,11 @@ async function seedHomeGroups() {
       meetingDay: 'Thursday',
       meetingTime: '6:30 PM',
       location: "Rafael & Aurea's Home, Rawai",
-      photos: ['/images/church/team-2026.jpg'],
+      photos: [
+        '/images/groups/rawai/1.jpg',
+        '/images/groups/rawai/2.jpg',
+        '/images/groups/rawai/3.jpg',
+      ],
       order: 3,
     },
     {
