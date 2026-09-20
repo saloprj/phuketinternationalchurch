@@ -3,8 +3,11 @@ import { prisma } from '@/lib/prisma';
 
 // The sitemap reads the database, so it must not stay frozen at the value it had
 // when the image was built — otherwise a post or page published in the admin panel
-// never reaches search engines until the next deploy.
-export const revalidate = 3600;
+// never reaches search engines until the next deploy. The database is not reachable
+// during the Docker build either, so a cached copy is not just stale, it is empty of
+// every dynamic entry. Crawlers fetch this a handful of times a day; build it per
+// request and keep it correct.
+export const dynamic = 'force-dynamic';
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://phuketinternationalchurch.com';
 const LOCALES = ['en', 'th', 'ru', 'zh'];
