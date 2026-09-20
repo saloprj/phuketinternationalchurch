@@ -4,6 +4,21 @@ import { prisma } from '@/lib/prisma';
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://phuketinternationalchurch.com';
 const LOCALES = ['en', 'th', 'ru', 'zh'];
 
+// Routes rendered by <GenericPage>: they 404 until a Page row with that slug is
+// PUBLISHED, so they are listed from the database rather than hardcoded.
+const CMS_PAGE_SLUGS = [
+  'baptism',
+  'care',
+  'kids',
+  'mission',
+  'next-steps',
+  'outreach',
+  'parents',
+  'resources',
+  'salvation',
+  'students',
+];
+
 function localizedUrls(path: string, lastModified?: Date) {
   return LOCALES.map((locale) => ({
     url: `${BASE_URL}/${locale}${path}`,
@@ -27,14 +42,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/prayer',
     '/live',
     '/alpha-course',
-    '/baptism',
-    '/salvation',
-    '/resources',
     '/groups',
     '/serving',
-    '/outreach',
-    '/mission',
-    '/next-steps',
     '/privacy-policy',
     '/cookie-policy',
     '/about/what-we-believe',
@@ -46,17 +55,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let dynamicEntries: MetadataRoute.Sitemap = [];
 
   try {
-    const [posts, events, sermons] = await Promise.all([
+    const [posts, events, sermons, cmsPages] = await Promise.all([
       prisma.post.findMany({ where: { status: 'PUBLISHED' }, select: { slug: true, updatedAt: true } }),
       prisma.event.findMany({ where: { status: 'PUBLISHED' }, select: { slug: true, updatedAt: true } }),
       prisma.sermon.findMany({ where: { status: 'PUBLISHED' }, select: { slug: true, updatedAt: true } }),
+      prisma.page.findMany({
+        where: { status: 'PUBLISHED', slug: { in: CMS_PAGE_SLUGS } },
+        select: { slug: true, updatedAt: true },
+      }),
     ]);
 
     const postEntries = posts.flatMap((p) => localizedUrls(`/blog/${p.slug}`, p.updatedAt));
     const eventEntries = events.flatMap((e) => localizedUrls(`/events/${e.slug}`, e.updatedAt));
     const sermonEntries = sermons.flatMap((s) => localizedUrls(`/sermons/${s.slug}`, s.updatedAt));
 
-    dynamicEntries = [...postEntries, ...eventEntries, ...sermonEntries];
+    const cmsPageEntries = cmsPages.flatMap((p) => localizedUrls(`/${p.slug}`, p.updatedAt));
+
+    dynamicEntries = [...postEntries, ...eventEntries, ...sermonEntries, ...cmsPageEntries];
   } catch {
     // DB not available during build
   }

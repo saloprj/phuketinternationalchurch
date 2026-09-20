@@ -35,6 +35,9 @@ COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
 RUN npm install -g prisma@5.22.0
 RUN mkdir -p /app/public/uploads && chown -R nextjs:nodejs /app/public/uploads
+# Next.js writes the ISR and optimized-image caches here at runtime; without this
+# the server logs EACCES on mkdir /app/.next/cache and every request re-renders.
+RUN mkdir -p /app/.next/cache && chown -R nextjs:nodejs /app/.next/cache
 
 USER nextjs
 
