@@ -1,4 +1,5 @@
 import { NextIntlClientProvider } from 'next-intl';
+import Script from 'next/script';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
@@ -83,6 +84,15 @@ export default async function LocaleLayout({
           <main id="main-content">{children}</main>
           <Footer locale={locale} />
         </NextIntlClientProvider>
+        {/* DialogBrain LiveChat. The widget key is public by design; it is
+            restricted to this site by the widget's allowed_domains list. */}
+        <Script id="dialogbrain-livechat" strategy="afterInteractive">
+          {`window.DialogBrainLiveChat = { widgetKey: "960a050c-fc0a-4810-9606-775a53e8ee2f" };`}
+        </Script>
+        <Script
+          src="https://dialogbrain.com/livechat/widget.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
