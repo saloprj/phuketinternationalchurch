@@ -6,6 +6,7 @@ import { prisma } from '@/lib/prisma';
 import { format } from 'date-fns';
 import HeroSlideshow from '@/components/HeroSlideshow';
 import LiteYouTubeEmbed from '@/components/ui/LiteYouTubeEmbed';
+import { localeAlternates } from '@/lib/alternates';
 
 type Locale = 'en' | 'th' | 'ru' | 'zh';
 
@@ -21,6 +22,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'home' });
   return {
+    alternates: localeAlternates(locale, ''),
     title: 'Phuket International Church — ' + t('heroTitle'),
     description: t('heroSubtitle'),
   };

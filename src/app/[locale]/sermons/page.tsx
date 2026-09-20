@@ -3,13 +3,16 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { prisma } from '@/lib/prisma';
 import { format } from 'date-fns';
+import { localeAlternates } from '@/lib/alternates';
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
+  const { locale } = await params;
   return {
+    alternates: localeAlternates(locale, '/sermons'),
     title: 'Sermons — Phuket International Church',
     description:
       'Listen to messages from Phuket International Church. Browse our sermon archive by series, speaker, or date.',

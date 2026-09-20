@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
 import PrayerForm from './PrayerForm';
+import { localeAlternates } from '@/lib/alternates';
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
+  const { locale } = await params;
   return {
+    alternates: localeAlternates(locale, '/prayer'),
     title: 'Prayer Requests — Phuket International Church',
     description:
       'Submit a prayer request to Phuket International Church. Our team prays for every request we receive.',

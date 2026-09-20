@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
 import { prisma } from '@/lib/prisma';
+import { localeAlternates } from '@/lib/alternates';
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
+  const { locale } = await params;
   return {
+    alternates: localeAlternates(locale, '/live'),
     title: 'Live Stream — Phuket International Church',
     description:
       'Watch Phuket International Church live. Sunday services at 10:30 AM (ICT).',

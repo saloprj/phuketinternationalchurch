@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
 import GiveClient from './GiveClient';
+import { localeAlternates } from '@/lib/alternates';
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
+  const { locale } = await params;
   return {
+    alternates: localeAlternates(locale, '/give'),
     title: 'Give — Phuket International Church',
     description:
       'Support the ministry of Phuket International Church. Give online via card or PromptPay.',

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { prisma } from '@/lib/prisma';
 import { format } from 'date-fns';
+import { localeAlternates } from '@/lib/alternates';
 
 type Locale = 'en' | 'th' | 'ru' | 'zh';
 
@@ -11,7 +12,9 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
+  const { locale } = await params;
   return {
+    alternates: localeAlternates(locale, '/blog'),
     title: 'Blog — Phuket International Church',
     description:
       'Thoughts, reflections, and updates from the Phuket International Church community.',

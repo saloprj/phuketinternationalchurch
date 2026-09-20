@@ -1,12 +1,21 @@
 {/* Content is English-only. To translate, extract text to messages/{locale}.json and use generateMetadata */}
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { localeAlternates } from '@/lib/alternates';
 
-export const metadata: Metadata = {
-  title: 'What We Believe — Phuket International Church',
-  description:
-    'Our Statement of Faith — the 16 fundamental truths of Phuket International Church, affiliated with the Assembly of God Fellowship Thailand.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    alternates: localeAlternates(locale, '/about/what-we-believe'),
+    title: 'What We Believe — Phuket International Church',
+    description:
+      'Our Statement of Faith — the 16 fundamental truths of Phuket International Church, affiliated with the Assembly of God Fellowship Thailand.',
+  };
+}
 
 export default async function WhatWeBelievePage({
   params,

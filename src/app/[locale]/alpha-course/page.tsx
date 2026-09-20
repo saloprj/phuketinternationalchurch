@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { localeAlternates } from '@/lib/alternates';
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
+  const { locale } = await params;
   return {
+    alternates: localeAlternates(locale, '/alpha-course'),
     title: 'Alpha Course — Phuket International Church',
     description:
       'Alpha is a 6-session course exploring the big questions of life and the Christian faith. Join us at Phuket International Church.',

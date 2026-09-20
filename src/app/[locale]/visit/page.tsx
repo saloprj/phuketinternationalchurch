@@ -3,13 +3,16 @@ import Link from 'next/link';
 import { faqSchema } from '@/lib/schema-org';
 import { prisma } from '@/lib/prisma';
 import { waLink } from '@/lib/phone';
+import { localeAlternates } from '@/lib/alternates';
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
+  const { locale } = await params;
   return {
+    alternates: localeAlternates(locale, '/visit'),
     title: 'Plan Your Visit — Phuket International Church',
     description:
       'Everything you need to know before your first visit: service times, location, parking, kids program, and what to expect.',

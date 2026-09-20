@@ -3,12 +3,21 @@ import type { Metadata } from 'next';
 import { prisma } from '@/lib/prisma';
 import { waLink } from '@/lib/phone';
 import { GroupHero, GroupThumbs } from '@/components/groups/GroupGallery';
+import { localeAlternates } from '@/lib/alternates';
 
-export const metadata: Metadata = {
-  title: 'Home Fellowship Groups — Phuket International Church',
-  description:
-    'Join one of our home groups and be part of a loving community. Meeting times, locations, and leaders across Phuket.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    alternates: localeAlternates(locale, '/groups'),
+    title: 'Home Fellowship Groups — Phuket International Church',
+    description:
+      'Join one of our home groups and be part of a loving community. Meeting times, locations, and leaders across Phuket.',
+  };
+}
 
 export default async function GroupsPage({
   params,

@@ -1,11 +1,20 @@
 import type { Metadata } from 'next';
 import { prisma } from '@/lib/prisma';
+import { localeAlternates } from '@/lib/alternates';
 
-export const metadata: Metadata = {
-  title: 'Serving & Ministries — Phuket International Church',
-  description:
-    'Explore the ways you can serve at PIC — guest service, media, small groups, kids, music, and youth.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    alternates: localeAlternates(locale, '/serving'),
+    title: 'Serving & Ministries — Phuket International Church',
+    description:
+      'Explore the ways you can serve at PIC — guest service, media, small groups, kids, music, and youth.',
+  };
+}
 
 const ICON_PATHS: Record<string, string> = {
   HandHeart:

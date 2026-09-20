@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
 import ContactForm from './ContactForm';
+import { localeAlternates } from '@/lib/alternates';
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
+  const { locale } = await params;
   return {
+    alternates: localeAlternates(locale, '/contact'),
     title: 'Contact — Phuket International Church',
     description:
       'Get in touch with Phuket International Church. We would love to hear from you.',
