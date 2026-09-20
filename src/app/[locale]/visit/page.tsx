@@ -36,6 +36,11 @@ const faqs = [
     answer: 'Sunday services run about 60 minutes.',
   },
   {
+    question: 'Is the service translated into my language?',
+    answer:
+      'Yes. The Sunday English service is translated live into Russian, Thai and Chinese. Scan the QR code at the entrance, pick your language, and listen through your own headphones — no extra equipment needed.',
+  },
+  {
     question: 'Do I need to be a Christian to attend?',
     answer: 'Not at all! Everyone is welcome regardless of background.',
   },
@@ -130,6 +135,27 @@ export default async function VisitPage({
                 <div className="text-gray-200 text-xs mt-1">{s.detail}</div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-6 bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+            <h3 className="font-bold text-text-main mb-2">
+              Live translation into your language
+            </h3>
+            <p className="text-gray-600">
+              The Sunday English service is translated live into{' '}
+              <strong>Russian, Thai and Chinese</strong>. Scan the QR code at
+              the entrance to join the translation room from your phone, choose
+              your language, and listen through your own headphones. We use{' '}
+              <a
+                href="https://dialogbrain.com/translation"
+                className="text-link underline"
+                target="_blank"
+                rel="noopener"
+              >
+                DialogBrain live translation
+              </a>{' '}
+              to make this possible.
+            </p>
           </div>
         </section>
 
