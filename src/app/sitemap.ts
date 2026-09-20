@@ -1,6 +1,11 @@
 import { MetadataRoute } from 'next';
 import { prisma } from '@/lib/prisma';
 
+// The sitemap reads the database, so it must not stay frozen at the value it had
+// when the image was built — otherwise a post or page published in the admin panel
+// never reaches search engines until the next deploy.
+export const revalidate = 3600;
+
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://phuketinternationalchurch.com';
 const LOCALES = ['en', 'th', 'ru', 'zh'];
 
