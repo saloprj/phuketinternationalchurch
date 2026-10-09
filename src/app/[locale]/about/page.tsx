@@ -1,4 +1,3 @@
-import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { prisma } from '@/lib/prisma';
@@ -10,7 +9,6 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'about' });
   return {
     alternates: localeAlternates(locale, '/about'),
     title: 'About Us — Phuket International Church',

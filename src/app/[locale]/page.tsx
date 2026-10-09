@@ -1,14 +1,20 @@
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { prisma } from '@/lib/prisma';
 import { format } from 'date-fns';
 import HeroSlideshow from '@/components/HeroSlideshow';
 import LiteYouTubeEmbed from '@/components/ui/LiteYouTubeEmbed';
 import { localeAlternates } from '@/lib/alternates';
+import { routing } from '@/i18n/routing';
 
 type Locale = 'en' | 'th' | 'ru' | 'zh';
+
+function isLocale(value: string): value is Locale {
+  return (routing.locales as readonly string[]).includes(value);
+}
 
 // Replace with the actual YouTube URL or ID for the Life at PIC video.
 // If left as the placeholder string, the video embed is not rendered.
@@ -20,6 +26,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  if (!isLocale(locale)) return {};
   const t = await getTranslations({ locale, namespace: 'home' });
   return {
     alternates: localeAlternates(locale, ''),
@@ -74,6 +81,10 @@ export default async function HomePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  // Paths with a dot (/wp-login.php, /.env) skip the middleware and land here
+  // with the filename as `locale`. Refuse them before touching the database:
+  // scanners send hundreds of these a day and each one cost three failed queries.
+  if (!isLocale(locale)) notFound();
   const t = await getTranslations({ locale, namespace: 'home' });
 
   let data = {
@@ -89,7 +100,7 @@ export default async function HomePage({
     },
   };
   try {
-    data = await getHomeData(locale as Locale);
+    data = await getHomeData(locale);
   } catch {
     // DB not available during build
   }
