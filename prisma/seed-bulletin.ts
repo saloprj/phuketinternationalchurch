@@ -36,9 +36,9 @@ async function seedStaff() {
     },
     {
       name: 'Pastor Dan Skitch',
-      role: 'Youth Pastor',
+      role: 'Pastor — Founder & Board Chair',
       bio: '',
-      photoUrl: null,
+      photoUrl: '/images/church/dan-skitch.jpg',
       email: null,
       phone: '+66 62 305 0286',
       order: 3,
