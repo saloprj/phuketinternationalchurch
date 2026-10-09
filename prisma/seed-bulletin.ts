@@ -35,15 +35,6 @@ async function seedStaff() {
       order: 2,
     },
     {
-      name: 'Pastor Dan Skitch',
-      role: 'Pastor — Founder & Board Chair',
-      bio: '',
-      photoUrl: '/images/church/dan-skitch.jpg',
-      email: null,
-      phone: '+66 62 305 0286',
-      order: 3,
-    },
-    {
       name: 'Pastor Benz',
       role: 'Pastor — Worship Team & Rawai Home Group',
       bio: '',
