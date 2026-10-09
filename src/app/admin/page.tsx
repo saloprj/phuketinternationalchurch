@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 
 async function getDashboardStats() {
@@ -35,13 +36,17 @@ async function getDashboardStats() {
 type StatCardProps = {
   title: string;
   value: number;
+  href: string;
   description?: string;
   color?: string;
 };
 
-function StatCard({ title, value, description, color = '#437086' }: StatCardProps) {
+function StatCard({ title, value, href, description, color = '#437086' }: StatCardProps) {
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+    <Link
+      href={href}
+      className="group block bg-white rounded-xl shadow-sm p-6 border border-gray-100 transition hover:shadow-md hover:border-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+    >
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm text-gray-500 font-medium">{title}</p>
@@ -50,8 +55,14 @@ function StatCard({ title, value, description, color = '#437086' }: StatCardProp
           </p>
           {description && <p className="text-xs text-gray-400 mt-1">{description}</p>}
         </div>
+        <span
+          aria-hidden="true"
+          className="text-xl text-gray-300 transition group-hover:text-primary group-hover:translate-x-1"
+        >
+          →
+        </span>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -70,33 +81,39 @@ export default async function AdminDashboardPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <StatCard
           title="Published Posts"
+          href="/admin/posts"
           value={stats.publishedPosts}
           description="Live blog posts"
         />
         <StatCard
           title="Upcoming Events"
+          href="/admin/events"
           value={stats.upcomingEvents}
           description="Scheduled from today"
         />
         <StatCard
           title="Published Sermons"
+          href="/admin/sermons"
           value={stats.publishedSermons}
           description="Available sermons"
         />
         <StatCard
           title="Unread Messages"
+          href="/admin/contact"
           value={stats.unreadContacts}
           description="Contact inbox"
           color={stats.unreadContacts > 0 ? '#d97706' : '#437086'}
         />
         <StatCard
           title="Unanswered Prayers"
+          href="/admin/prayer"
           value={stats.unansweredPrayers}
           description="Prayer requests"
           color={stats.unansweredPrayers > 0 ? '#d97706' : '#437086'}
         />
         <StatCard
           title="Newsletter Subscribers"
+          href="/admin/newsletter"
           value={stats.activeSubscribers}
           description="Active subscribers"
           color="#f8b841"
