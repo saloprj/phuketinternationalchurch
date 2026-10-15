@@ -43,6 +43,15 @@ async function seedStaff() {
       phone: '+66 83 640 4483',
       order: 4,
     },
+    {
+      name: 'Denys Deputatov',
+      role: 'Elder — Russian Group',
+      bio: 'Leads the Russian Group. Founder of DialogBrain, the platform behind our live service translation.',
+      photoUrl: '/images/church/denys-deputatov.jpg',
+      email: null,
+      phone: null,
+      order: 5,
+    },
   ];
 
   for (const s of staff) {
